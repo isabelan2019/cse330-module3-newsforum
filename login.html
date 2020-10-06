@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login to the Quarterly </title>
+    <link href="file.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+    <h1>The Quarterly</h1> <br> <br>
+
+    <h2> Log in to edit your stories</h2>
+    <!--Log in as existing user-->
+    <div class="loginform">
+        <form name="input" action="user.php" method="GET">
+            <label> Username: </label>
+            <input type="text" name="username">
+            <label> Password: </label>
+            <input type="text" name="password">
+            <input type="submit" value="Log In">
+        </form>
+    </div> <br> <br>
+
+    <!--Create new user-->
+    <h2>Make a new user</h2>
+    <div class="loginform">
+        <form action='adduser.php' method='GET'>
+            <label> Create a new username: </label>
+            <input type='text' name='newUser'>
+            <label> Create a new password: </label>
+            <input type="text" name="newpassword">
+            <input type='submit' value='Sign Up'>
+        </form>
+    </div> <br> <br>
+
+    <!--Change username-->
+    <h2>Change your username</h2>
+    <div class="loginform">
+        <form name="input" action="changeuser.php" method="GET">
+            <label> Old username: </label>
+            <input type="text" name="oldname">
+            <label> Password: </label>
+            <input type="text" name="password">
+            <label> New username: </label>
+            <input type="text" name="changedname">
+            <input type="submit" value="Update Account">
+        </form>
+    </div> <br> <br>
+
+
+</body>
+
+</html>

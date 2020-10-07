@@ -1,8 +1,9 @@
 <?php
 session_start();
 require 'database.php';
-$post_id=$_POST['post_id'];
 
+$_SESSION['post_id']=$_POST['post_id'];
+$post_id=$_SESSION['post_id'];
 //retrieve the original post
 $stmt=$mysqli->prepare("select title, story, link, user_id from stories where post_id=?");
 if(!$stmt){
@@ -22,8 +23,9 @@ while($stmt->fetch()){
     echo "<form action='addcomment.php' method='post'>
         <textarea name='comment_text'> </textarea>
         <input type='hidden' name='post_id' value=$post_id>
-        <input type='submit' value='Add Comment'>";
-    
+        <input type='submit' value='Add Comment'>
+        </form>";
+
 }
 
 //show all comments
@@ -40,18 +42,19 @@ $stmt = $mysqli->prepare("select comment_text, users.username, comment_id,user_i
    
     while($stmt->fetch()){
         echo "<div>\n";
-        printf("\t %s %s",
+        printf("\t %s %s %u" ,
             htmlspecialchars($username),
-            htmlspecialchars($comment_text)
+            htmlspecialchars($comment_text),
+            htmlspecialchars($comment_id)
     );
         if($_SESSION['user_id']==$user_id){
         echo "<form action='editcomment.php' method='POST'> 
             <input type='submit' value='Edit'> 
-            <input type='hidden' name='comment_id' value=$comment_id;
+            <input type='hidden' name='comment_id' value=$comment_id>
             </form>";
         echo "<form action='deletecomment.php' method='POST'> 
             <input type='submit' value='Delete'> 
-            <input type='hidden' name='comment_id' value=$comment_id;
+            <input type='hidden' name='comment_id' value=$comment_id>
             </form>";
         echo "</div>\n";
         }

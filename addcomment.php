@@ -17,4 +17,6 @@ $stmt->bind_param('iis', $user_id,$post_id,$comment_text);
 $stmt->execute();
 $stmt->close();
 
+header('Location:story_page.php');
+exit;
 ?>

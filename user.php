@@ -25,7 +25,7 @@ if($cnt==1 && password_verify($pwd_guess, $pwd_hash)){
     header('LOCATION:main.php');
 } else {
     //login failed 
-    header('LOCATION:loginfail.php');
+    header('LOCATION:loginfail.html');
 }
 
 //retrieve associated user_id and set session variable

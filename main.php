@@ -14,6 +14,12 @@
 <body>
 <h1>Welcome to the Quarterly</h1>
 
+<div id="logout">
+    <form action="logout.php" method="GET">
+        <input type="submit" value="Log Out">
+    </form>
+</div>
+
 </body>
 
 </html>

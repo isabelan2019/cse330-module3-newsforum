@@ -6,7 +6,7 @@ $stmt = $mysqli->prepare("SELECT COUNT(*), id, hashed_password from users where 
 
 //bind parameter
 $stmt->bind_param('s',$user);
-$user = $_POST['username'];
+$user = (string) $_POST['username'];
 $stmt->execute();
 
 //bind results
@@ -14,7 +14,7 @@ $stmt->bind_result($cnt, $user_id, $pwd_hash);
 $stmt->fetch();
 
 //compare form password with database password
-$pwd_guess = $_POST['password'];
+$pwd_guess = (string) $_POST['password'];
 
 if($cnt==1 && password_verify($pwd_guess, $pwd_hash)){
     //login success

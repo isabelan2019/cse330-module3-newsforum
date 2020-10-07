@@ -1,7 +1,10 @@
 <?php
 session_start();
 require 'database.php';
-
+if(!isset($_SESSION['user_id'])){
+    echo "You must have an account to submit a story.";
+}
+else{
 //post the story to database
 $user_id = $_SESSION['user_id'];
 $title = $_POST['title'];
@@ -21,4 +24,5 @@ $stmt->close();
 
 header('Location:main.php');
 exit;
+}
 ?>

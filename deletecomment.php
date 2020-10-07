@@ -2,9 +2,10 @@
 session_start();
 require 'database.php';
 
-//delete story from database
+//set the comment id from input
 $comment_id=$_POST['comment_id'];
 
+//delete comment from database
 $stmt = $mysqli->prepare("delete from comments where comment_id=?");
 
 if(!$stmt){
@@ -16,4 +17,6 @@ $stmt->bind_param('i', $comment_id);
 $stmt->execute();
 $stmt->close();
 
+header('location:story_page.php');
+exit;
 ?>

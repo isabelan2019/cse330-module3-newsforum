@@ -2,7 +2,13 @@
 session_start();
 require 'database.php';
 
-//insert comment into database
+//if unregistered user tries to click on add comment button, give error message
+if(!isset($_SESSION['user_id'])){
+    echo "You must have an account to comment.";
+}
+
+else{
+//if registered user, insert comment into database
 $user_id = $_SESSION['user_id'];
 $post_id = $_POST['post_id'];
 $comment_text = $_POST['comment_text'];
@@ -16,7 +22,9 @@ if(!$stmt){
 $stmt->bind_param('iis', $user_id,$post_id,$comment_text);
 $stmt->execute();
 $stmt->close();
-
-header('Location:story_page.php');
+header('location:story_page.php');
 exit;
+}
+
+
 ?>

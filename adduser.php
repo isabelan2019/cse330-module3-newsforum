@@ -15,5 +15,5 @@ if (!$stmt) {
 $stmt->bind_param('ss', $newuser, $newpassword);
 $stmt->execute();
 $stmt->close();
-
+header('location:loginsuccess.html');
 ?>

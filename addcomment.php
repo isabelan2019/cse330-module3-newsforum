@@ -8,9 +8,14 @@ if(!isset($_SESSION['user_id'])){
 }
 
 else{
+
+if(!hash_equals($_SESSION['token'], $_POST['token'])){
+    die("Request forgery detected");
+}
+
 //if registered user, insert comment into database
 $user_id = $_SESSION['user_id'];
-$post_id = $_POST['post_id'];
+$post_id = $_SESSION['post_id'];
 $comment_text = $_POST['comment_text'];
 
 $stmt = $mysqli->prepare("insert into comments(user_id, post_id, comment_text) values (?, ?, ?)");
@@ -22,6 +27,7 @@ if(!$stmt){
 $stmt->bind_param('iis', $user_id,$post_id,$comment_text);
 $stmt->execute();
 $stmt->close();
+
 header('location:story_page.php');
 exit;
 }

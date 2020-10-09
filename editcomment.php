@@ -6,6 +6,10 @@ require 'database.php';
 $comment_id=$_POST['comment_id'];
 $new_comment=$_POST['new_comment'];
 
+if(!hash_equals($_SESSION['token'], $_POST['token'])){
+	die("Request forgery detected");
+}
+
 //update comment in database
 $stmt = $mysqli->prepare("update comments set comment_text=? where comment_id=?");
 

@@ -3,9 +3,21 @@ session_start();
 require 'database.php';
 
 //input passed from main page when comments button is clicked 
-//set post id and title variables
-$post_id=(int)$_POST['post_id'];
-$post_title=(string) $_POST['post_title'];
+//set session id variable for the post
+if(isset($_SESSION['user_id'])){
+    $token=$_SESSION['token'];
+}
+if(!isset($_SESSION['post_id'])){
+    $_SESSION['post_id']=(int)$_POST['post_id'];
+    
+}
+$post_id=$_SESSION['post_id'];
+
+
+if(!isset($_SESSION['post_title'])){
+    $_SESSION['post_title'] = (string)$_POST['post_title'];
+}
+$post_title=$_SESSION['post_title'];
 
 ?>
 
@@ -44,6 +56,7 @@ $post_title=(string) $_POST['post_title'];
                 <textarea name='comment_text'> </textarea>
                 <input type='hidden' name='post_id' value=$post_id>
                 <input type='submit' value='Add Comment'>
+                <input type='hidden' name='token' value='$token'>
                 </form>";
             }
         }
@@ -74,11 +87,13 @@ $post_title=(string) $_POST['post_title'];
                     <textarea name='new_comment'> </textarea>
                     <input type='hidden' name='comment_id' value=$comment_id>
                     <input type='hidden' name='user_id' value=$post_id>
+                    <input type='hidden' name='token' value='$token'>
                     </form>";
                 echo "<form action='deletecomment.php' method='POST'> 
                     <input type='submit' value='Delete'> 
                     <input type='hidden' name='comment_id' value=$comment_id>
                     <input type='hidden' name='user_id' value=$post_id>
+                    <input type='hidden' name='token' value='$token'>
                     </form>";
                 echo "</div>\n";
                 }
@@ -89,6 +104,5 @@ $post_title=(string) $_POST['post_title'];
     <form action="returnmain.php" method="post">
         <input type="submit" value="Return to Main Page">
     </form>
-    <p>  </p>
 </body>
 </html>

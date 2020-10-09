@@ -5,6 +5,11 @@ if(!isset($_SESSION['user_id'])){
     echo "You must have an account to submit a story.";
 }
 else{
+
+ if(!hash_equals($_SESSION['token'], $_POST['token'])){
+	die("Request forgery detected");
+}
+   
 //post the story to database
 $user_id = $_SESSION['user_id'];
 $title = $_POST['title'];

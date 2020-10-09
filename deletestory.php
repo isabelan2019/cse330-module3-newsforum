@@ -5,6 +5,10 @@ require 'database.php';
 //set post id from hidden input 
 $post_id=$_POST['post_id'];
 
+if(!hash_equals($_SESSION['token'], $_POST['token'])){
+	die("Request forgery detected");
+}
+
 //first delete all comments associated with the post 
 $stmt = $mysqli->prepare("delete from comments where post_id=?");
 

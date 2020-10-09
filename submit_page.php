@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +19,7 @@
         <label> Tags (optional): </label>
         <input type="text" name="tags">
         <input type="submit" value="Post Your Story">
+        <input type="hidden" name="token" value="<?php echo $_SESSION['token'];?>" />
     </form>
 </body>
 </html>

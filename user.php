@@ -29,4 +29,7 @@ if($cnt==1 && password_verify($pwd_guess, $pwd_hash)){
 }
 
 $stmt->close();
+
+//generate token
+$_SESSION['token'] = bin2hex(random_bytes(32));
 ?>

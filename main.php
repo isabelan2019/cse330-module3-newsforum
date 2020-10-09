@@ -5,8 +5,12 @@
     if(isset($_SESSION['user_id'])){
     $username= (string) $_SESSION['user'];
     $user_id = (int) $_SESSION['user_id'];
+    $token=$_SESSION['token'];
     }
    
+    $_SESSION["post_id"]=null;
+    $_SESSION["post_title"]=null;
+ 
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +57,7 @@
     $stmt->execute();
     $stmt->bind_result($submission_title,$submission_story,$submission_link,$submission_user,$submission_id);
 
-   
+    
     while($stmt->fetch()){
         echo "<div>\n";
         
@@ -63,28 +67,30 @@
             htmlspecialchars($submission_title),
             htmlspecialchars($submission_story),
             htmlspecialchars($submission_id)
-    );
-    
+    );    
+
     //have a comments button to view all comments
     //passes through two hidden inputs: the post id and title 
-        echo "\t<form action='story_page.php' method='post'>
-                <input type='submit' value='Comments'>
-                <input type='hidden' name='post_id' value=$submission_id>
-                <input type='hidden' name='post_title' value='$submission_title'>
-                </form>";
-    
+    echo "\t<form action='story_page.php' method='post'>
+            <input type='submit' value='Comments'>
+            <input type='hidden' name='post_id' value=$submission_id>
+            <input type='hidden' name='post_title' value='$submission_title'>
+            </form>";    
+        
     //if registered user and this post is owned by that user, then have delete and edit buttons appear
         if(isset($_SESSION['user_id']) && $_SESSION['user_id']==$submission_user){
            //delete post
             echo "<form action='deletestory.php' method='POST'> 
             <input type='submit' value='Delete Post'> 
             <input type='hidden' name='post_id' value=$submission_id>
+            <input type='hidden' name='token' value='$token'>
             </form>";
             
            //edit post
-            echo "<form action='editstory.php' method='POST'> 
+            echo "<form action='editstory_page.php' method='POST'> 
             <input type='submit' value='Edit Post'> 
             <input type='hidden' name='post_id' value=$submission_id>
+            <input type='hidden' name='token' value='$token'>
             </form>";
             
         }     
@@ -93,7 +99,7 @@
     $stmt->close();
 ?>
 <div>
-    <a href="submit.html"> Submit Your Story </a>
+    <a href="submit_page.php"> Submit Your Story </a>
 </div>
 
 

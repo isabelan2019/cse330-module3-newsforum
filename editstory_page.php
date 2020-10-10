@@ -20,8 +20,8 @@ $_SESSION['post_id']=$_POST['post_id'];
         <textarea name="story"> </textarea>
         <label> New Link (optional): </label>
         <input type="text" name="link">
-        <label> New Tags (optional): </label>
-        <input type="text" name="tags">
+        <label> New Category (optional): </label>
+        <input type="text" name="category">
         <input type="submit" value="Edit Your Story">
         <input type="hidden" name="token" value="<?php echo $_SESSION['token'];?>" />
     </form>

@@ -6,22 +6,29 @@ require 'database.php';
 $post_id=$_SESSION['post_id'];
 $new_title = $_POST['title'];
 $new_story = $_POST['story'];
+if($_POST['link']==""){
+	$_POST['link'] = "#";
+}
 $new_link = $_POST['link'];
-$new_tags = $_POST['tags'];
+if($_POST['category']==""){
+	$_POST['category']=null;
+}
+$new_category = $_POST['category'];
+
 
 if(!hash_equals($_SESSION['token'], $_POST['token'])){
 	die("Request forgery detected");
 }
 
 //update story
-$stmt = $mysqli->prepare("update stories set title=?, story=?, link=?, tags=? where post_id=?");
+$stmt = $mysqli->prepare("update stories set title=?, story=?, link=?, category=? where post_id=?");
 
 if(!$stmt){
     printf("Query Prep Failed: %s\n", $mysqli->error);
 	exit;
 }
 
-$stmt->bind_param('ssssi', $new_title, $new_story, $new_link, $new_tags, $post_id);
+$stmt->bind_param('ssssi', $new_title, $new_story, $new_link, $new_category, $post_id);
 $stmt->execute();
 $stmt->close();
 

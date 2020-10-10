@@ -8,6 +8,7 @@
     $token=$_SESSION['token'];
     }
    
+    //reset session id for post id and post title whenever redirected back to this page
     $_SESSION["post_id"]=null;
     $_SESSION["post_title"]=null;
  
@@ -25,6 +26,7 @@
 
 <body>
 <h1>Welcome to The Quarterly</h1>
+<!--navigation bar that allows user to click on a category and display posts associated with category-->
 <nav>
     <form action="main.php" >
         <input type="submit" value="All">
@@ -52,9 +54,7 @@
 </nav>
 <?php
     require 'database.php';
-
-    //have the log in button appear if unregistered user
-    //have a message and log out button appear if registered user
+    //if registered user, log out button appears
     if(isset($_SESSION['user_id'])){
         printf("<p > You are logged in as %s </p>",
         htmlspecialchars($username));
@@ -66,6 +66,7 @@
             </div>";
         }
     else{
+     //if unregistered user, log in button appears
         echo "<div>
         <form action='login.html' method='POST'>
             <input type='submit' value='Log In'>
@@ -73,7 +74,8 @@
     </div>";
     }
     echo "<div>";
-    //retrieve all relevant info on every story in stories table
+
+    //select all relevant info on every story in stories table
     $stmt = $mysqli->prepare("select title, story, link, user_id, post_id from stories");
     if(!$stmt){
         printf("Query Prep Failed: %s\n", $mysqli->error);
@@ -86,14 +88,13 @@
     while($stmt->fetch()){
         echo "<div class='story'>\n";
          
-    // print out the title, story, and link
+    // print out the title, story, and link for registered and unregistered users
         printf("\t<a class='title' href=%s> %s </a>",
             htmlspecialchars($submission_link),
             htmlspecialchars($submission_title)
     );    
 
-    //have a comments button to view all comments
-    //passes through two hidden inputs: the post id and title 
+    //have a view button to view story and comments
     echo "\t<form action='story_page.php' method='post'>
             <input type='submit' value='View'>
             <input type='hidden' name='post_id' value=$submission_id>

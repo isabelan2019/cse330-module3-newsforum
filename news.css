@@ -2,11 +2,13 @@ body{
     background: #e5e5e5;
     text-align:center;
     font-family: "Didot", serif;
+    margin-left:0px;
+    margin-right:0px;
 }
 
 .title{
     font-weight: 900;
-    width:200px;
+    width:300px;
 }
 
 a:link, a:visited{
@@ -30,12 +32,18 @@ input[type="submit"]:hover{
 .story,.comment{
     display:flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: left;
     align-items:center;
     margin: 20px;
 }
-
-
+.story form,.comment form{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.comment p{
+    margin-left: 20px;
+    margin-right: 20px;
+}
 .add, .edit{
     display:flex;
     flex-direction: column;
@@ -58,5 +66,24 @@ input[type="submit"]:hover{
     width:200px;
     margin-left:auto;
     margin-right:auto;
+}
+
+nav{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-evenly;
+    background-color:white;
+    margin-bottom: 10px;
+    height:50px;
+    align-items: center;
+}
+nav input[type='submit']{
+    margin-top:0px;
+    border-color: transparent;
+}
+nav input[type='submit']:hover{
+    border-color:transparent;
+    height:50px;
+    
 }
 

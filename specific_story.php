@@ -12,7 +12,6 @@
     $_SESSION["post_title"]=null;
  
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,7 +51,8 @@
 </nav>
 <?php
     require 'database.php';
-
+    
+    $category = $_POST['category'];
     //have the log in button appear if unregistered user
     //have a message and log out button appear if registered user
     if(isset($_SESSION['user_id'])){
@@ -73,12 +73,13 @@
     </div>";
     }
     echo "<div>";
-    //retrieve all relevant info on every story in stories table
-    $stmt = $mysqli->prepare("select title, story, link, user_id, post_id from stories");
+    //retrieve all relevant info on story with specific tag in stories table
+    $stmt = $mysqli->prepare("select title, story, link, user_id, post_id from stories where category=?");
     if(!$stmt){
         printf("Query Prep Failed: %s\n", $mysqli->error);
         exit;
     }
+    $stmt->bind_param("s",$category);
     $stmt->execute();
     $stmt->bind_result($submission_title,$submission_story,$submission_link,$submission_user,$submission_id);
 
@@ -128,7 +129,3 @@
     </form>
 </div>
 
-
-</body>
-
-</html>

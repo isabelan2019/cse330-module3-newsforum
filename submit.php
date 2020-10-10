@@ -14,20 +14,22 @@ else{
 $user_id = $_SESSION['user_id'];
 $title = $_POST['title'];
 $story = $_POST['story'];
-$link = $_POST['link'];
-$tags = $_POST['tags'];
-
-if ($link==""){
-    $link="#";
+if($_POST['link']==""){
+    $_POST['link']="#";
 }
+$link = $_POST['link'];
+if($_POST['category']==""){
+    $_POST['category']=null;
+}
+$category = $_POST['category'];
 
-$stmt = $mysqli->prepare("insert into stories(user_id, title, story, link, tags) values (?, ?, ?, ?, ?)");
+$stmt = $mysqli->prepare("insert into stories(user_id, title, story, link, category) values (?, ?, ?, ?, ?)");
 if(!$stmt){
     printf("Query Prep Failed: %s\n", $mysqli->error);
 	exit;
 }
 
-$stmt->bind_param('issss', $user_id,$title,$story,$link,$tags);
+$stmt->bind_param('issss', $user_id,$title,$story,$link,$category);
 $stmt->execute();
 $stmt->close();
 

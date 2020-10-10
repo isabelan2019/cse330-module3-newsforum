@@ -11,6 +11,7 @@ session_start();
 
 </head>
 <body>
+    <h2> Submit your story below by filling out the fields. You can also choose to sort your post in one of the following categories: politics, science, arts, sports, opinion. </h2>
     <form action="submit.php" method="post">
         <label> Submission Title: </label>
         <input type="text" name="title">
@@ -18,8 +19,8 @@ session_start();
         <textarea name="story"> </textarea>
         <label> Link (optional): </label>
         <input type="text" name="link">
-        <label> Tags (optional): </label>
-        <input type="text" name="tags">
+        <label> Category (optional): </label>
+        <input type="text" name="category">
         <input type="submit" value="Post Your Story">
         <input type="hidden" name="token" value="<?php echo $_SESSION['token'];?>" />
     </form>

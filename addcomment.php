@@ -9,6 +9,7 @@ if(!isset($_SESSION['user_id'])){
 
 else{
 
+//query failed
 if(!hash_equals($_SESSION['token'], $_POST['token'])){
     die("Request forgery detected");
 }

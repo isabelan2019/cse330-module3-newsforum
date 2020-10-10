@@ -6,6 +6,7 @@ require 'database.php';
 $comment_id=$_POST['comment_id'];
 $new_comment=$_POST['new_comment'];
 
+//query failed
 if(!hash_equals($_SESSION['token'], $_POST['token'])){
 	die("Request forgery detected");
 }

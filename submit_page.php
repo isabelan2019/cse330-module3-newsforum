@@ -7,6 +7,8 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Your Story</title>
+    <link href="news.css" type="text/css" rel="stylesheet" />
+
 </head>
 <body>
     <form action="submit.php" method="post">

@@ -17,6 +17,10 @@ $story = $_POST['story'];
 $link = $_POST['link'];
 $tags = $_POST['tags'];
 
+if ($link==""){
+    $link="#";
+}
+
 $stmt = $mysqli->prepare("insert into stories(user_id, title, story, link, tags) values (?, ?, ?, ?, ?)");
 if(!$stmt){
     printf("Query Prep Failed: %s\n", $mysqli->error);

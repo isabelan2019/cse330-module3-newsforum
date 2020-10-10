@@ -9,6 +9,8 @@ $_SESSION['post_id']=$_POST['post_id'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Your Post </title>
+    <link href="news.css" type="text/css" rel="stylesheet" />
+
 </head>
 <body>
     <form action="editstory.php" method="POST">

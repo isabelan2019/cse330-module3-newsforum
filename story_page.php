@@ -3,13 +3,15 @@ session_start();
 require 'database.php';
 
 //input passed from main page when comments button is clicked 
-//set session id variable for the post
+//if registed user, set token
+//if click into the page for the first time, set post id and post title 
+
 if(isset($_SESSION['user_id'])){
     $token=$_SESSION['token'];
 }
+
 if(!isset($_SESSION['post_id'])){
     $_SESSION['post_id']=(int)$_POST['post_id'];
-    
 }
 $post_id=$_SESSION['post_id'];
 
@@ -28,6 +30,8 @@ $post_title=$_SESSION['post_title'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> <?php echo htmlspecialchars($post_title)?> </title>
+    <link href="news.css" type="text/css" rel="stylesheet" />
+
 </head>
 <body>
     <?php
@@ -44,15 +48,14 @@ $post_title=$_SESSION['post_title'];
 
         //print out the title and story of the post 
         while($stmt->fetch()){
-            printf("%s %s %u",
+            printf("<div> <h2> %s </h2> %s </div>",
                 htmlspecialchars($title),
-                htmlspecialchars($story),
-                htmlspecialchars($user_id)
+                htmlspecialchars($story)
             );
 
         //if registered user, they will see a textbox and add comment button
             if(isset($_SESSION['user_id'])){
-            echo "<form action='addcomment.php' method='post'>
+            echo "<form class='add' action='addcomment.php' method='post'>
                 <textarea name='comment_text'> </textarea>
                 <input type='hidden' name='post_id' value=$post_id>
                 <input type='submit' value='Add Comment'>
@@ -74,17 +77,18 @@ $post_title=$_SESSION['post_title'];
 
         //display all comments below post
             while($stmt->fetch()){
-                echo "<div>\n";
-                printf("\t %s %s %u" ,
-                    htmlspecialchars($username),
-                    htmlspecialchars($comment_text),
-                    htmlspecialchars($comment_id)
-            );
+                
         //if registered user and comment belongs to registered user, buttons will appear to delete and edit comment 
                 if(isset($_SESSION['user_id']) && $_SESSION['user_id']==$user_id){
-                echo "<form action='editcomment.php' method='POST'> 
-                    <input type='submit' value='Edit'> 
+                
+                echo "<div class='comment'>\n";
+                printf("\t <p class='username'> %s </p> <p class='storytext'> %s </p>" ,
+                    htmlspecialchars($username),
+                    htmlspecialchars($comment_text)
+            );
+                echo "<form class='edit' action='editcomment.php' method='POST'> 
                     <textarea name='new_comment'> </textarea>
+                    <input type='submit' value='Edit'> 
                     <input type='hidden' name='comment_id' value=$comment_id>
                     <input type='hidden' name='user_id' value=$post_id>
                     <input type='hidden' name='token' value='$token'>
@@ -97,12 +101,23 @@ $post_title=$_SESSION['post_title'];
                     </form>";
                 echo "</div>\n";
                 }
+                else{
+                    echo "<div class='comment'>\n";
+                    printf("\t <p class='username'> %s </p> <p class='storytext'> %s </p>",
+                    htmlspecialchars($username),
+                    htmlspecialchars($comment_text),
+                    htmlspecialchars($comment_id)
+            );
+                echo "</div>";
+                }
             }
             $stmt->close();
 
     ?>
+    <div>
     <form action="returnmain.php" method="post">
         <input type="submit" value="Return to Main Page">
     </form>
+        </div>
 </body>
 </html>

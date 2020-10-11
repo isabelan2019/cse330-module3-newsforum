@@ -4,20 +4,36 @@ require 'database.php';
 
 //set variables
 $post_id=$_SESSION['post_id'];
-$new_title = $_POST['title'];
-$new_story = $_POST['story'];
+$new_title = (string)$_POST['title'];
+$new_story = (string)$_POST['story'];
 
 //if user does not submit link, set # 
 if($_POST['link']==""){
-	$_POST['link'] = "#";
+    $_POST['link']="#";
+} else if (!preg_match('/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i',$_POST['link'])) {
+    echo "Invalid URL"; 
+    exit;
 }
 $new_link = $_POST['link'];
 
+
 //if user does not submit category, set null
 if($_POST['category']==""){
-	$_POST['category']=null;
+    $new_category=null;
+} else if ($_POST['category']=="politics") {
+    $new_category = (string) $_POST['category'];
+} else if ($_POST['category']=="science") {
+    $new_category = (string) $_POST['category'];
+} else if ($_POST['category']=="arts") {
+    $new_category = (string) $_POST['category'];
+} else if ($_POST['category']=="opinion") {
+    $new_category = (string) $_POST['category'];
+} else if ($_POST['category']=="sports") {
+    $new_category = (string) $_POST['category'];
+} else {
+    echo "Invalid Category Type";
+    exit;
 }
-$new_category = $_POST['category'];
 
 //query failed
 if(!hash_equals($_SESSION['token'], $_POST['token'])){

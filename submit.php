@@ -12,16 +12,37 @@ else{
    
 //post the story to database
 $user_id = $_SESSION['user_id'];
-$title = $_POST['title'];
-$story = $_POST['story'];
+$title = (string) $_POST['title'];
+$story = (string) $_POST['story'];
+
 if($_POST['link']==""){
     $_POST['link']="#";
+} else if (!preg_match('/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i',$_POST['link'])) {
+    echo "Invalid URL"; 
+    exit;
 }
 $link = $_POST['link'];
+
+
 if($_POST['category']==""){
-    $_POST['category']=null;
+    $category=null;
+} else if ($_POST['category']=="politics") {
+    $category = (string) $_POST['category'];
+} else if ($_POST['category']=="science") {
+    $category = (string) $_POST['category'];
+} else if ($_POST['category']=="arts") {
+    $category = (string) $_POST['category'];
+} else if ($_POST['category']=="opinion") {
+    $category = (string) $_POST['category'];
+} else if ($_POST['category']=="sports") {
+    $category = (string) $_POST['category'];
+} else {
+    echo "Invalid Category Type";
+    exit;
 }
-$category = $_POST['category'];
+
+// should check category 
+
 
 $stmt = $mysqli->prepare("insert into stories(user_id, title, story, link, category) values (?, ?, ?, ?, ?)");
 if(!$stmt){

@@ -57,7 +57,7 @@
     require 'database.php';
     
     //set category variable (passed from main.php)
-    $category = $_POST['category'];
+    $category = (string) $_POST['category'];
 
     //if registered user, log out button appears
     if(isset($_SESSION['user_id'])){

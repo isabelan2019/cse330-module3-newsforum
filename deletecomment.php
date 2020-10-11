@@ -3,7 +3,7 @@ session_start();
 require 'database.php';
 
 //set the comment id from input
-$comment_id=$_POST['comment_id'];
+$comment_id=(int)$_POST['comment_id'];
 
 if(!hash_equals($_SESSION['token'], $_POST['token'])){
 	die("Request forgery detected");

@@ -21,7 +21,6 @@ $correct = FALSE;
 
 if($cnt==1 && password_verify($pwd_guess, $pwd_hash)){
     //login success
-    echo "yay right person";
     $correct =TRUE;
 } else {
     //login failed 
@@ -31,7 +30,6 @@ if($cnt==1 && password_verify($pwd_guess, $pwd_hash)){
 $stmt->close();
 
 if ($correct=TRUE) {
-    echo 'changing';
     $changedname = (string) $_POST['changedname'];
     $stmt = $mysqli->prepare("update users set username =? where id=?");
     if (!$stmt) {

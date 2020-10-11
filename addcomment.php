@@ -17,7 +17,7 @@ if(!hash_equals($_SESSION['token'], $_POST['token'])){
 //if registered user, insert comment into database
 $user_id = $_SESSION['user_id'];
 $post_id = $_SESSION['post_id'];
-$comment_text = $_POST['comment_text'];
+$comment_text =  (string) $_POST['comment_text'];
 
 $stmt = $mysqli->prepare("insert into comments(user_id, post_id, comment_text) values (?, ?, ?)");
 if(!$stmt){

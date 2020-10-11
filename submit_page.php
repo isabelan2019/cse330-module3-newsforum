@@ -1,5 +1,9 @@
 <?php
 session_start();
+if(!isset($_SESSION['user_id'])){
+    echo "You must have an account to submit a story.";
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,9 +18,9 @@ session_start();
     <h2> Submit your story below by filling out the fields. You can also choose to sort your post in one of the following categories: politics, science, arts, sports, opinion. </h2>
     <form action="submit.php" method="post">
         <label> Submission Title: </label>
-        <input type="text" name="title">
+        <input type="text" name="title" required>
         <label> Submission Text: </label>
-        <textarea name="story"> </textarea>
+        <textarea name="story" required> </textarea>
         <label> Link (optional): </label>
         <input type="text" name="link">
         <label> Category (optional): </label>

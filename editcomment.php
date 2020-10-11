@@ -3,8 +3,8 @@ session_start();
 require 'database.php';
 
 //set comment id and new comment passed from input
-$comment_id=$_POST['comment_id'];
-$new_comment=$_POST['new_comment'];
+$comment_id=(int) $_POST['comment_id'];
+$new_comment=(string)$_POST['new_comment'];
 
 //query failed
 if(!hash_equals($_SESSION['token'], $_POST['token'])){

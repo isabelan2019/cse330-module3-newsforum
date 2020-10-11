@@ -1,6 +1,6 @@
 <?php
 session_start();
-$_SESSION['post_id']=$_POST['post_id'];
+$_SESSION['post_id']=(int)$_POST['post_id'];
 ?>
 
 <!DOCTYPE html>
@@ -13,11 +13,13 @@ $_SESSION['post_id']=$_POST['post_id'];
 
 </head>
 <body>
+    <h2>This form will update all inputs for your story. For example, leaving the link input blank where you 
+        used to have a link will remove the link from your story. You must re-type the values of story you want to keep.</h2>
     <form action="editstory.php" method="POST">
         <label> New Submission Title: </label>
-        <input type="text" name="title">
+        <input type="text" name="title" required>
         <label> New Submission Text: </label>
-        <textarea name="story"> </textarea>
+        <textarea name="story" required> </textarea>
         <label> New Link (optional): </label>
         <input type="text" name="link">
         <label> New Category (optional): </label>

@@ -4,16 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Success</title>
+    <title>Username Taken</title>
     <link href="news.css" type="text/css" rel="stylesheet" />
 </head>
 
 <body>
-    <p>Your action is succesful! </p>
-    <form action="returnmain.php" method="POST">
-        <input id="return" type="submit" value="Go to the Main Page">
-    </form>
-    <form action="returnlogin.php" method="POST">
+    <p>That username is already taken. Please use a different one.</p>
+    <form action="returnlogin.php" method="GET">
         <input id="return" type="submit" value="Return to Login Page">
     </form>
 </body>

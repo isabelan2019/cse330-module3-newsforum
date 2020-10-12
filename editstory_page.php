@@ -19,7 +19,7 @@ $_SESSION['post_id']=(int)$_POST['post_id'];
         <label> New Submission Title: </label>
         <input type="text" name="title" required>
         <label> New Submission Text: </label>
-        <textarea name="story" required> </textarea>
+        <input type="text" name="story" required>
         <label> New Link (optional): </label>
         <input type="text" name="link">
         <label> New Category (optional): </label>

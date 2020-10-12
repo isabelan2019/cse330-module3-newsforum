@@ -16,6 +16,10 @@ $user_id = (int)$_SESSION['user_id'];
 $title = (string) $_POST['title'];
 $story = (string) $_POST['story'];
 
+//filtering input
+//for links
+//if link is empty then fill it with #
+//otherwise if link does not have http or www, does not have .com or has white space, echo invalid url 
 if($_POST['link']==""){
     $_POST['link']="#";
 } else if (!preg_match('/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i',$_POST['link'])) {
@@ -24,7 +28,8 @@ if($_POST['link']==""){
 }
 $link = (string)$_POST['link'];
 
-
+//if the category is empty, set it to null in database
+//otherwise it has to be one of the five categories we have
 if($_POST['category']==""){
     $category=null;
 } else if ($_POST['category']=="politics") {
@@ -42,7 +47,6 @@ if($_POST['category']==""){
     exit;
 }
 
-// should check category 
 
 $stmt = $mysqli->prepare("insert into stories(user_id, title, story, link, category) values (?, ?, ?, ?, ?)");
 if(!$stmt){

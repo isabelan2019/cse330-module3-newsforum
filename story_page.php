@@ -55,7 +55,7 @@ $post_title=$_SESSION['post_title'];
         //if registered user, they will see a textbox and add comment button
             if(isset($_SESSION['user_id'])){
             echo "\n \t <form class='add' action='addcomment.php' method='post'>
-                <textarea name='comment_text'> </textarea>
+                <input type='text name='comment_text' required> 
                 <input type='hidden' name='post_id' value=$post_id>
                 <input type='submit' value='Add Comment'>
                 <input type='hidden' name='token' value='$token'>
@@ -85,7 +85,7 @@ $post_title=$_SESSION['post_title'];
                     htmlentities($comment_text)
             );
                 echo "\n \t<form class='edit' action='editcomment.php' method='POST'> 
-                    <textarea name='new_comment'> </textarea>
+                    <input type='text' name='new_comment' required> 
                     <input type='submit' value='Edit'> 
                     <input type='hidden' name='comment_id' value=$comment_id>
                     <input type='hidden' name='user_id' value=$post_id>

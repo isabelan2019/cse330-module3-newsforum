@@ -9,6 +9,10 @@ $stmt = $mysqli->prepare("SELECT COUNT(*), id, hashed_password from users where 
 $stmt->bind_param('s',$user);
 $_SESSION['user'] = (string) $_POST['username'];
 $user = $_SESSION['user'];
+if( !preg_match('/^[\w_\-]+$/', $user) ){
+	echo "Invalid username. You can only use alphanumeric characters, hyphens, and underscores.";
+	exit;
+}
 $stmt->execute();
 
 //bind results

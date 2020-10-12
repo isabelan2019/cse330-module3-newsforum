@@ -2,7 +2,8 @@
 session_start();
 require 'database.php';
 
-///prepared statement
+
+//prepared statement
 $stmt = $mysqli->prepare("SELECT COUNT(*), id, hashed_password from users where username=?");
 
 //bind parameter
@@ -15,13 +16,19 @@ $stmt->execute();
 $stmt->bind_result($cnt, $user_id, $pwd_hash);
 $stmt->fetch();
 
+//checks if entry exists
+if($cnt==0){
+    header("Location:loginfail.html");
+    exit;
+}
+
 //compare form password with database password
 $pwd_guess = (string) $_POST['password'];
 $correct = FALSE;
 
 if($cnt==1 && password_verify($pwd_guess, $pwd_hash)){
     //login success
-    $correct =TRUE;
+    $correct = TRUE;
 } else {
     //login failed 
     header('LOCATION:loginfail.html');
@@ -29,8 +36,12 @@ if($cnt==1 && password_verify($pwd_guess, $pwd_hash)){
 
 $stmt->close();
 
-if ($correct=TRUE) {
+if ($correct==TRUE) {
     $changedname = (string) $_POST['changedname'];
+    if( !preg_match('/^[\w_\-]+$/', $changedname) ){
+        echo "Invalid username. You can only use alphanumeric characters, hyphens, and underscores.";
+        exit;
+    }
     $stmt = $mysqli->prepare("update users set username =? where id=?");
     if (!$stmt) {
         printf("Query Prep Failed: %s \n", $mysqli->error);

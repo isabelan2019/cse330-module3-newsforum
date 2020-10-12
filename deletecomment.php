@@ -5,6 +5,7 @@ require 'database.php';
 //set the comment id from input
 $comment_id=(int)$_POST['comment_id'];
 
+//token does not pass
 if(!hash_equals($_SESSION['token'], $_POST['token'])){
 	die("Request forgery detected");
 }

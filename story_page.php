@@ -47,14 +47,14 @@ $post_title=$_SESSION['post_title'];
 
         //print out the title and story of the post 
         while($stmt->fetch()){
-            printf("<div> <h2> %s </h2> %s </div>",
+            printf("<div> \n \t <h2> %s </h2> \n %s </div>",
                 htmlentities($title),
                 htmlentities($story)
             );
 
         //if registered user, they will see a textbox and add comment button
             if(isset($_SESSION['user_id'])){
-            echo "<form class='add' action='addcomment.php' method='post'>
+            echo "\n \t <form class='add' action='addcomment.php' method='post'>
                 <textarea name='comment_text'> </textarea>
                 <input type='hidden' name='post_id' value=$post_id>
                 <input type='submit' value='Add Comment'>
@@ -79,34 +79,34 @@ $post_title=$_SESSION['post_title'];
         //if registered user and comment belongs to registered user, buttons will appear to delete and edit comment 
                 if(isset($_SESSION['user_id']) && $_SESSION['user_id']==$user_id){
                 
-                echo "<div class='comment'>\n";
-                printf("\t <p class='username'> %s </p> <p class='storytext'> %s </p>" ,
+                echo "\n<div class='comment'>\n";
+                printf("\t <p class='username'> %s </p> \n \t<p class='storytext'> %s </p>" ,
                     htmlentities($username),
                     htmlentities($comment_text)
             );
-                echo "<form class='edit' action='editcomment.php' method='POST'> 
+                echo "\n \t<form class='edit' action='editcomment.php' method='POST'> 
                     <textarea name='new_comment'> </textarea>
                     <input type='submit' value='Edit'> 
                     <input type='hidden' name='comment_id' value=$comment_id>
                     <input type='hidden' name='user_id' value=$post_id>
                     <input type='hidden' name='token' value='$token'>
                     </form>";
-                echo "<form action='deletecomment.php' method='POST'> 
+                echo "\n \t<form action='deletecomment.php' method='POST'> 
                     <input type='submit' value='Delete'> 
                     <input type='hidden' name='comment_id' value=$comment_id>
                     <input type='hidden' name='user_id' value=$post_id>
                     <input type='hidden' name='token' value='$token'>
                     </form>";
-                echo "</div>\n";
+                echo "\n \t</div>\n";
                 }
                 else{
             //if unregistered user, just print out the comments (this was needed in order to close divs)
-                    echo "<div class='comment'>\n";
+                    echo "\n<div class='comment'>\n";
                     printf("\t <p class='username'> %s </p> <p class='storytext'> %s </p>",
                     htmlentities($username),
                     htmlentities($comment_text)
             );
-                echo "</div>";
+                echo "\n</div>";
                 }
             }
             $stmt->close();
@@ -116,6 +116,6 @@ $post_title=$_SESSION['post_title'];
     <form action="returnmain.php" method="post">
         <input type="submit" value="Return to Main Page">
     </form>
-        </div>
+    </div>
 </body>
 </html>

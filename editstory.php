@@ -7,7 +7,10 @@ $post_id=(int)$_SESSION['post_id'];
 $new_title = (string)$_POST['title'];
 $new_story = (string)$_POST['story'];
 
-//if user does not submit link, set # 
+//filtering input
+//for links
+//if link is empty then fill it with #
+//otherwise if link does not have http or www or has white space, echo invalid url 
 if($_POST['link']==""){
     $_POST['link']="#";
 } else if (!preg_match('/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i',$_POST['link'])) {
@@ -17,7 +20,8 @@ if($_POST['link']==""){
 $new_link = $_POST['link'];
 
 
-//if user does not submit category, set null
+//if the category is empty, set it to null in database
+//otherwise it has to be one of the five categories we have
 if($_POST['category']==""){
     $new_category=null;
 } else if ($_POST['category']=="politics") {

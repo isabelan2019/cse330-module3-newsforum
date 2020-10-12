@@ -18,8 +18,6 @@ if ($user=$newuser) {
     header('location:userfail.html');
 }
 
-
-
 $stmt = $mysqli->prepare("insert into users (username, hashed_password) values (?,?)");
 if (!$stmt) {
     printf("Query Prep Failed: %s \n", $mysqli->error);

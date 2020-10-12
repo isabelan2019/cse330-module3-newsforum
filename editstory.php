@@ -3,7 +3,7 @@ session_start();
 require 'database.php';
 
 //set variables
-$post_id=$_SESSION['post_id'];
+$post_id=(int)$_SESSION['post_id'];
 $new_title = (string)$_POST['title'];
 $new_story = (string)$_POST['story'];
 
@@ -35,7 +35,7 @@ if($_POST['category']==""){
     exit;
 }
 
-//query failed
+//token does not pass
 if(!hash_equals($_SESSION['token'], $_POST['token'])){
 	die("Request forgery detected");
 }

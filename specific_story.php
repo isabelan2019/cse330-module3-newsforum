@@ -62,7 +62,7 @@
     //if registered user, log out button appears
     if(isset($_SESSION['user_id'])){
         printf("<p > You are logged in as %s </p>",
-        htmlspecialchars($username));
+        htmlentities($username));
 
         echo "<div class='log'>
             <form action='logout.php' method='POST'>
@@ -96,8 +96,8 @@
          
     // print out the title, story, and link
         printf("\t<a class='title' href=%s> %s </a>",
-            htmlspecialchars($submission_link),
-            htmlspecialchars($submission_title)
+        htmlentities($submission_link),
+        htmlentities($submission_title)
     );    
 
     //have a view button to view full story and comments

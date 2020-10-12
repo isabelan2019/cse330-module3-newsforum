@@ -4,12 +4,12 @@ require 'database.php';
 
 //if unregistered user tries to click on add comment button, give error message
 if(!isset($_SESSION['user_id'])){
-    echo "You must have an account to comment.";
+    echo htmlentities("You must have an account to comment.");
 }
 
 else{
 
-//query failed
+//token does not pass
 if(!hash_equals($_SESSION['token'], $_POST['token'])){
     die("Request forgery detected");
 }
@@ -20,6 +20,8 @@ $post_id = $_SESSION['post_id'];
 $comment_text =  (string) $_POST['comment_text'];
 
 $stmt = $mysqli->prepare("insert into comments(user_id, post_id, comment_text) values (?, ?, ?)");
+
+//query failed
 if(!$stmt){
     printf("Query Prep Failed: %s\n", $mysqli->error);
 	exit;

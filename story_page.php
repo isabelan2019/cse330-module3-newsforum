@@ -29,7 +29,7 @@ $post_title=$_SESSION['post_title'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> <?php echo htmlspecialchars($post_title)?> </title>
+    <title> <?php echo htmlentities($post_title)?> </title>
     <link href="news.css" type="text/css" rel="stylesheet" />
 
 </head>
@@ -48,8 +48,8 @@ $post_title=$_SESSION['post_title'];
         //print out the title and story of the post 
         while($stmt->fetch()){
             printf("<div> <h2> %s </h2> %s </div>",
-                htmlspecialchars($title),
-                htmlspecialchars($story)
+                htmlentities($title),
+                htmlentities($story)
             );
 
         //if registered user, they will see a textbox and add comment button
@@ -81,8 +81,8 @@ $post_title=$_SESSION['post_title'];
                 
                 echo "<div class='comment'>\n";
                 printf("\t <p class='username'> %s </p> <p class='storytext'> %s </p>" ,
-                    htmlspecialchars($username),
-                    htmlspecialchars($comment_text)
+                    htmlentities($username),
+                    htmlentities($comment_text)
             );
                 echo "<form class='edit' action='editcomment.php' method='POST'> 
                     <textarea name='new_comment'> </textarea>
@@ -103,8 +103,8 @@ $post_title=$_SESSION['post_title'];
             //if unregistered user, just print out the comments (this was needed in order to close divs)
                     echo "<div class='comment'>\n";
                     printf("\t <p class='username'> %s </p> <p class='storytext'> %s </p>",
-                    htmlspecialchars($username),
-                    htmlspecialchars($comment_text)
+                    htmlentities($username),
+                    htmlentities($comment_text)
             );
                 echo "</div>";
                 }

@@ -64,7 +64,7 @@
         printf("<p > You are logged in as %s </p>",
         htmlentities($username));
 
-        echo "<div class='log'>
+        echo "\n\t<div class='log'>
             <form action='logout.php' method='POST'>
             <input type='submit' value='Log Out'>
             </form>
@@ -72,13 +72,13 @@
         }
     else{
     //if unregistered user, log in button appears
-        echo "<div>
+        echo "\n \t <div>
         <form action='login.html' method='POST'>
             <input type='submit' value='Log In'>
         </form>
     </div>";
     }
-    echo "<div>";
+    echo "\n <div>";
 
     //retrieve all relevant info on story with specific tag in stories table
     $stmt = $mysqli->prepare("select title, story, link, user_id, post_id from stories where category=?");
@@ -92,7 +92,7 @@
 
     
     while($stmt->fetch()){
-        echo "<div class='story'>\n";
+        echo "\n\t <div class='story'>\n";
          
     // print out the title, story, and link
         printf("\t<a class='title' href=%s> %s </a>",
@@ -101,7 +101,7 @@
     );    
 
     //have a view button to view full story and comments
-    echo "\t<form action='story_page.php' method='post'>
+    echo "\n\t <form action='story_page.php' method='post'>
             <input type='submit' value='View'>
             <input type='hidden' name='post_id' value=$submission_id>
             <input type='hidden' name='post_title' value='$submission_title'>
@@ -110,21 +110,21 @@
     //if registered user and this post is owned by that user, then have delete and edit buttons appear
         if(isset($_SESSION['user_id']) && $_SESSION['user_id']==$submission_user){
            //delete post
-            echo "<form action='deletestory.php' method='POST'> 
+            echo "\n\t<form action='deletestory.php' method='POST'> 
             <input type='submit' value='Delete Post'> 
             <input type='hidden' name='post_id' value=$submission_id>
             <input type='hidden' name='token' value='$token'>
             </form>";
             
            //edit post
-            echo "<form action='editstory_page.php' method='POST'> 
+            echo "\n\t <form action='editstory_page.php' method='POST'> 
             <input type='submit' value='Edit Post'> 
             <input type='hidden' name='post_id' value=$submission_id>
             <input type='hidden' name='token' value='$token'>
             </form>";
             
         }     
-        echo "</div>\n";
+        echo "\n\t </div>\n";
     }
     $stmt->close();
 ?>

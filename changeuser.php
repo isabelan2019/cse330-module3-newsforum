@@ -31,7 +31,7 @@ if($cnt==1 && password_verify($pwd_guess, $pwd_hash)){
 }
 $stmt->close();
 
-//prepared statement --checks user credentials
+//prepared statement --check if new username already exists
 $stmt = $mysqli->prepare("SELECT COUNT(*) from users where username=?");
 
 //bind parameter

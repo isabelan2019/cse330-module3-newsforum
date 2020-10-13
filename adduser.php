@@ -11,6 +11,10 @@ $newpassword = password_hash((string) $_POST['newpassword'], PASSWORD_DEFAULT);
 
 //checks username doesnt already exist
 $stmt = $mysqli->prepare("SELECT COUNT(*) from users where username=?");
+if(!$stmt){
+    printf("Query Prep Failed: %s\n", $mysqli->error);
+    exit;
+}
 
 //bind parameter
 $stmt->bind_param('s', $user);

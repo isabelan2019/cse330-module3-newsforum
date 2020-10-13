@@ -21,9 +21,9 @@
     <div class="loginform">
         <form class="loginform" action="user.php" method="POST">
             <label> Username: </label>
-            <input type="text" name="username">
+            <input type="text" name="username" required>
             <label> Password: </label>
-            <input type="password" name="password">
+            <input type="password" name="password" required>
             <input type="submit" value="Log In">
         </form>
     </div> <br> <br>
@@ -33,9 +33,9 @@
     <div>
         <form class="loginform" action="adduser.php" method="POST">
             <label> Create a new username: </label>
-            <input type="text" name="newuser">
+            <input type="text" name="newuser" required>
             <label> Create a new password: </label>
-            <input type="password" name="newpassword">
+            <input type="password" name="newpassword" required>
             <input type='submit' value='Sign Up'>
         </form>
     </div> <br> <br>
@@ -45,11 +45,11 @@
     <div >
         <form class="loginform" action="changeuser.php" method="POST">
             <label> Old username: </label>
-            <input type="text" name="oldname">
+            <input type="text" name="oldname" required>
             <label> Password: </label>
-            <input type="password" name="password">
+            <input type="password" name="password" required>
             <label> New username: </label>
-            <input type="text" name="changedname">
+            <input type="text" name="changedname" required>
             <input type="submit" value="Update Account">
         </form>
     </div> <br> <br>

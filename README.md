@@ -1,7 +1,23 @@
 # CSE330
-456941
+- 456941
+- 458267
 
-458267
+Link to Main Page for News Site:
+http://ec2-18-188-149-204.us-east-2.compute.amazonaws.com/~isabel.an/module3_group/main.php
+
+Log In Information:
+
+Username: isabel
+Password: goodbye
+
+Username: claire
+Password: hello
+
+Username: elaine
+Password: fix
+
+Username: scott
+Password: fong
 
 Creative Portion 
 

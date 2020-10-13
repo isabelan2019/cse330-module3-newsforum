@@ -47,7 +47,7 @@ $post_title=$_SESSION['post_title'];
 
         //print out the title and story of the post 
         while($stmt->fetch()){
-            printf("<div> \n \t <h2> %s </h2> \n %s </div>",
+            printf("<div class='post'> \n \t <h2> %s </h2> \n <p> %s </p> </div>",
                 htmlentities($title),
                 htmlentities($story)
             );

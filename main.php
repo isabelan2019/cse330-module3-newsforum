@@ -73,6 +73,7 @@
         </form>
     </div>";
     }
+    echo "<p> Click on the title to be directed to news article link (if attached). </p>";
     echo "\n <div>";
 
     //select all relevant info on every story in stories table

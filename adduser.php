@@ -2,6 +2,10 @@
 require 'database.php';
 
 $newuser = (string) $_POST['newuser'];
+if( !preg_match('/^[\w_\-]+$/', $newuser) ){
+	echo "Invalid username. You can only use alphanumeric characters, hyphens, and underscores.";
+	exit;
+}
 $newpassword = password_hash((string) $_POST['newpassword'], PASSWORD_DEFAULT);
 
 //checks username doesnt already exist
@@ -17,8 +21,6 @@ $stmt->fetch();
 if ($user=$newuser) {
     header('location:userfail.html');
 }
-
-
 
 $stmt = $mysqli->prepare("insert into users (username, hashed_password) values (?,?)");
 if (!$stmt) {

@@ -20,7 +20,7 @@ if(!isset($_SESSION['user_id'])){
         <label> Submission Title: </label>
         <input type="text" name="title" required>
         <label> Submission Text: </label>
-        <textarea name="story" required> </textarea>
+        <input type="text" name="story" required>
         <label> Link (optional): </label>
         <input type="text" name="link">
         <label> Category (optional): </label>

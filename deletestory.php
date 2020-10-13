@@ -5,6 +5,7 @@ require 'database.php';
 //set post id from hidden input 
 $post_id=(int)$_POST['post_id'];
 
+//token does not pass
 if(!hash_equals($_SESSION['token'], $_POST['token'])){
 	die("Request forgery detected");
 }

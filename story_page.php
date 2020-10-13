@@ -55,7 +55,7 @@ $post_title=$_SESSION['post_title'];
         //if registered user, they will see a textbox and add comment button
             if(isset($_SESSION['user_id'])){
             echo "\n \t <form class='add' action='addcomment.php' method='post'>
-                <input type='text name='comment_text' required> 
+                <input type='text' name='comment_text' required> 
                 <input type='hidden' name='post_id' value=$post_id>
                 <input type='submit' value='Add Comment'>
                 <input type='hidden' name='token' value='$token'>
@@ -64,14 +64,14 @@ $post_title=$_SESSION['post_title'];
         }
 
         //select all comments associated with that post
-        $stmt = $mysqli->prepare("select comment_text, users.username, comment_id,user_id, post_id from comments join users on (users.id=user_id) where post_id=?");
+        $stmt = $mysqli->prepare("select comment_text, users.username, comment_id,user_id, post_id,comment_likes from comments join users on (users.id=user_id) where post_id=?");
             if(!$stmt){
                 printf("Query Prep Failed: %s\n", $mysqli->error);
                 exit;
             }
             $stmt->bind_param('i',$post_id);
             $stmt->execute();
-            $stmt->bind_result($comment_text,$username,$comment_id,$user_id, $post_id);
+            $stmt->bind_result($comment_text,$username,$comment_id,$user_id, $post_id, $comment_likes);
 
         //display all comments below post
             while($stmt->fetch()){
@@ -84,6 +84,15 @@ $post_title=$_SESSION['post_title'];
                     htmlentities($username),
                     htmlentities($comment_text)
             );
+
+                echo "\n \t<form action='likecomment.php' method='POST'> ";
+                printf("\t<input type='submit' value=' %d likes'>",
+                    htmlspecialchars($comment_likes)
+            );
+                echo "\t <input type='hidden' name='comment_id' value=$comment_id>
+                    <input type='hidden' name='user_id' value=$post_id>
+                    </form>";
+                
                 echo "\n \t<form class='edit' action='editcomment.php' method='POST'> 
                     <input type='text' name='new_comment' required> 
                     <input type='submit' value='Edit'> 
@@ -106,6 +115,13 @@ $post_title=$_SESSION['post_title'];
                     htmlentities($username),
                     htmlentities($comment_text)
             );
+                    echo "\n \t<form action='likecomment.php' method='POST'> ";
+                printf("\t<input type='submit' value=' %d likes'>",
+                    htmlspecialchars($comment_likes)
+            );
+                echo "\t <input type='hidden' name='comment_id' value=$comment_id>
+                    <input type='hidden' name='user_id' value=$post_id>
+                    </form>";
                 echo "\n</div>";
                 }
             }

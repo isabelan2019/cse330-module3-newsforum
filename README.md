@@ -1,6 +1,6 @@
 # CSE330
-- 456941
-- 458267
+- Claire Irawan: 456941
+- Isabel An: 458267
 
 Link to Main Page for News Site:
 http://ec2-18-188-149-204.us-east-2.compute.amazonaws.com/~isabel.an/module3_group/main.php

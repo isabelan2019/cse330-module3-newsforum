@@ -1,6 +1,11 @@
 # CSE330
-- Claire Irawan: 456941
-- Isabel An: 458267
+
+Contributors
+- Claire Irawan
+- Isabel An
+
+About: 
+News sharing website where users can post and comment on news articles 
 
 Link to Main Page for News Site:
 http://ec2-18-188-149-204.us-east-2.compute.amazonaws.com/~isabel.an/module3_group/main.php
